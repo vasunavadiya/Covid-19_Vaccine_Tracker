@@ -4,6 +4,7 @@ import json
 import time
 import datetime
 import smtplib
+import pyttsx3
 
 
 PINCODE = "<ENTER YOUR PINCODE>" #Example 600040
@@ -30,7 +31,14 @@ while True:
                 #For Age not equal to 45 and capacity is above zero
                 if (session['min_age_limit'] != 45) & (session['available_capacity'] >= 1):
                     message_string=f"Subject: {today}'s Alert'!! \n\n Available - {session['available_capacity']} in {center['name']} on {session['date']} for the age {session['min_age_limit']}"
-
+                    #Alaram Alert On your Devices Alarm Repeat On for 3 time#
+                    cont=4 #if you want to ring up more than one then increse this value#
+                    while count != 1:
+                        engine = pyttsx3.init()
+                        engine.say('Vaccine Is Available in Your area')
+                        engine.say('Go and Register')
+                        count = count - 1
+                        engine.runAndWait()
                     #Configure GMAIL settings
                     with smtplib.SMTP("smtp.gmail.com") as connection:
                         connection.starttls()
